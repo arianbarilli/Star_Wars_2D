@@ -1,5 +1,44 @@
 import pygame
 import random
+from funcoes import dormir, limpa_Tela, registro
+
+acionamento = True
+arroba = True
+
+registro()
+
+while True:
+    limpa_Tela()
+    print()
+    print("BEM VINDO JOGADOR AO STAR WARS X-WING ATTACK")
+    print()
+    print("Por Favor, digite Seu Nome e Endereço de E-mail:")
+    print()
+    while acionamento == True:
+        conteudo = registro()
+        nome = input("Nome: ")
+        while arroba == True:
+            email = input(str("Email: "))
+            if "@" in email and ".com" in email:
+                conteudo = conteudo + nome + "\n" + email + "\n" + "\n"
+                arroba = False
+                acionamento = False
+                break
+            elif "@" not in email or ".com" not in email:
+                print ("Por Favor digite um E-mail Válido")
+                arroba = True
+        
+        arquivo = open("registro_de_login.txt", "w")
+        arquivo.write(conteudo)
+        arquivo.close()
+        print("Registro de login Salvo")
+        dormir()
+        if arroba == False:
+            break
+    if arroba == False:
+        limpa_Tela()
+        break
+
 pygame.init()
 largura = 1530
 altura = 780
@@ -12,24 +51,56 @@ pygameDisplay.set_icon(gameIcon)
 
 fundo = pygame.image.load("assets/fundo.jpeg")
 fundoDeath = pygame.image.load("assets/navedestroyed.jpeg")
+<<<<<<< HEAD
+fundocomeco = pygame.image.load("assets/starwarsfundo.jfif")
+=======
+>>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
 
+somlogin = pygame.mixer.Sound("assets/somLogin.mp3")
+somlogin.set_volume(1)
+trilha = pygame.mixer.Sound("assets/sound.mp3")
+trilha.set_volume(1)
+ImperialNavy = pygame.mixer.Sound("assets/ImperialNavy.mp3")
+ImperialNavy.set_volume(1)
 explosaoSound = pygame.mixer.Sound("assets/explode.ogg")
 explosaoSound.set_volume(0.5)
+<<<<<<< HEAD
+yellow = (255, 255, 0)
+=======
+>>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
 red = (255, 0, 0)
 green = (0, 255, 0)
 clock = pygame.time.Clock()
 eventos = pygame.event
+jogar = False
 
 def game_over(pontos):
     gameDisplay.blit(fundoDeath, (0, 0))
-    pygame.mixer.music.stop()
+    pygame.mixer.Sound.stop(somlogin)
+    pygame.mixer.Sound.stop(trilha)
     pygame.mixer.Sound.play(explosaoSound)
+    pygame.mixer.Sound.play(ImperialNavy)
     fonte = pygame.font.Font("freesansbold.ttf", 50)
     fonteContinue = pygame.font.Font("freesansbold.ttf", 30)
     texto = fonte.render("Você Perdeu com "+str(pontos) + " pontos", True, red)
+<<<<<<< HEAD
+    textoContinue = fonteContinue.render("Aperte Espaço para continuar ou a Tecla P para Sair...", True, red)
+    gameDisplay.blit(textoContinue, (120, 700))
+    gameDisplay.blit(texto, (120, 600))
+    pygameDisplay.update()
+
+def iniciar():
+    pygame.mixer.Sound.play(somlogin)
+    pygame.mixer.music.set_volume(1)
+    gameDisplay.blit(fundocomeco, (0, 0))
+    fonteContinue = pygame.font.Font("freesansbold.ttf", 30)
+    textoContinue = fonteContinue.render("Aperte com o botão esquedo do Mouse e Espaço para continuar ou a Tecla P para Sair...", True, yellow)
+    gameDisplay.blit(textoContinue, (200, 700))
+=======
     textoContinue = fonteContinue.render("Aperte ENTER para continuar...", True, green)
     gameDisplay.blit(textoContinue, (120, 700))
     gameDisplay.blit(texto, (120, 600))
+>>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
     pygameDisplay.update()
 
 def jogo():
@@ -40,7 +111,7 @@ def jogo():
     posicaoYLaser = random.randrange(0, altura-120)
     posicaoYLaser2 = random.randrange(0, altura-120)
     direcao = True
-    speed = 2
+    speed = 7
     posicaoXNave = 650
     posicaoYNave = 300
     movimentoANave = 0
@@ -51,10 +122,11 @@ def jogo():
     laser = pygame.image.load("assets/laser.png")
     nave = pygame.image.load("assets/nave.png")
     laser = pygame.transform.flip(laser, True, False)
-    pygame.mixer.music.load("assets/sound.mp3")
-    pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(1)
 
+    pygame.mixer.Sound.stop(somlogin)
+    pygame.mixer.Sound.stop(ImperialNavy)
+    pygame.mixer.Sound.play(trilha)
+    pygame.mixer.music.set_volume(1)
     laserSound = pygame.mixer.Sound("assets/laserSound.ogg")
     laserSound.set_volume(1)
     pygame.mixer.Sound.play(laserSound)
@@ -65,15 +137,21 @@ def jogo():
     alturaMissel = 120
     dificuldade = 59
     jogando = True
-
+        
     while True:
+
         for event in eventos.get():
             if event.type == pygame.QUIT:
+                limpa_Tela()
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
+                if event.key == pygame.K_SPACE and jogando == False:
                     jogo()
+                if event.key == pygame.K_p:
+                    limpa_Tela()
+                    pygame.quit()
+                    quit()
                 if event.key == pygame.K_a:
                     movimentoANave = -25
                 elif event.key == pygame.K_d:
@@ -98,7 +176,10 @@ def jogo():
             elif direcaoNave == False and movimentoDNave + movimentoDNave > 0:
                 nave = pygame.transform.flip(nave, True, False)
                 direcaoNave = True
+<<<<<<< HEAD
+=======
 
+>>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
 
         if jogando == True:
             posicaoXNave = posicaoXNave + movimentoANave
@@ -122,7 +203,8 @@ def jogo():
                     pygame.mixer.Sound.play(laserSound)
                     direcao = False
                     posicaoYLaser = random.randrange(0, altura -120)
-                    speed = speed + 1
+                    if speed <= 25:
+                        speed = speed + 1
                     laser = pygame.transform.flip(laser, True, False)
                     pontos = pontos + 1
             else:
@@ -132,7 +214,8 @@ def jogo():
                     pygame.mixer.Sound.play(laserSound)
                     direcao = True
                     posicaoYLaser = random.randrange(0, altura -120)
-                    speed = speed + 1
+                    if speed <= 25:
+                        speed = speed + 1
                     laser = pygame.transform.flip(laser, True, False)
                     pontos = pontos + 1
 
@@ -155,7 +238,7 @@ def jogo():
             gameDisplay.blit(nave, (posicaoXNave, posicaoYNave))
             fonte = pygame.font.Font("freesansbold.ttf", 20)
             placar = fonte.render("Pontos: "+str(pontos), True, green)
-            gameDisplay.blit(placar, (10, 10))
+            gameDisplay.blit(placar, (90, 10))
 
             pixelsYNave = list(range(posicaoYNave, posicaoYNave + alturaNave+1))
             pixelsXNave = list(range(posicaoXNave, posicaoXNave + larguraNave+1))
@@ -177,4 +260,27 @@ def jogo():
 
         pygameDisplay.update()
         clock.tick(60)
+<<<<<<< HEAD
+
+while True:        
+    if jogar == False:
+        iniciar()
+    elif jogar == True:
+        jogo()
+    for event in eventos.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                jogar == True
+                jogo()
+            elif event.key == pygame.K_p:
+                limpa_Tela()
+                pygame.quit()
+                quit()
+    if jogar == True:
+        break
+=======
 jogo()
+>>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
