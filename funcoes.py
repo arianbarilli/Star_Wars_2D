@@ -9,11 +9,11 @@ def dormir():
 
 def registro():
     try:
-        arquivo = open("registro_de_login.txt", "r")
+        arquivo = open("Registro de Login.txt", "r")
         conteudo = arquivo.read()
         arquivo.close()
         return conteudo
     except:
-        arquivo = open("registro_de_login.txt", "w")
+        arquivo = open("Registro de Login.txt", "w")
         arquivo.close()
         return ""

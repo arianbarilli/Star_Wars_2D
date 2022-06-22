@@ -10,9 +10,9 @@ registro()
 while True:
     limpa_Tela()
     print()
-    print("BEM VINDO JOGADOR AO STAR WARS X-WING ATTACK")
+    print("BEM VINDO(A) AO STAR WARS X-WING ATTACK")
     print()
-    print("Por Favor, digite Seu Nome e Endereço de E-mail:")
+    print("Por Favor, digite Seu Nome e Endereço de E-mail")
     print()
     while acionamento == True:
         conteudo = registro()
@@ -28,15 +28,14 @@ while True:
                 print ("Por Favor digite um E-mail Válido")
                 arroba = True
         
-        arquivo = open("registro_de_login.txt", "w")
+        arquivo = open("Registro de Login.txt", "w")
         arquivo.write(conteudo)
         arquivo.close()
-        print("Registro de login Salvo")
+        print("Registro de login salvo com sucesso!")
         dormir()
         if arroba == False:
             break
     if arroba == False:
-        limpa_Tela()
         break
 
 pygame.init()
@@ -51,10 +50,7 @@ pygameDisplay.set_icon(gameIcon)
 
 fundo = pygame.image.load("assets/fundo.jpeg")
 fundoDeath = pygame.image.load("assets/navedestroyed.jpeg")
-<<<<<<< HEAD
-fundocomeco = pygame.image.load("assets/starwarsfundo.jfif")
-=======
->>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
+fundocomeco = pygame.image.load("assets/starwarsfundo.jpeg")
 
 somlogin = pygame.mixer.Sound("assets/somLogin.mp3")
 somlogin.set_volume(1)
@@ -64,10 +60,7 @@ ImperialNavy = pygame.mixer.Sound("assets/ImperialNavy.mp3")
 ImperialNavy.set_volume(1)
 explosaoSound = pygame.mixer.Sound("assets/explode.ogg")
 explosaoSound.set_volume(0.5)
-<<<<<<< HEAD
 yellow = (255, 255, 0)
-=======
->>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
 red = (255, 0, 0)
 green = (0, 255, 0)
 clock = pygame.time.Clock()
@@ -83,8 +76,7 @@ def game_over(pontos):
     fonte = pygame.font.Font("freesansbold.ttf", 50)
     fonteContinue = pygame.font.Font("freesansbold.ttf", 30)
     texto = fonte.render("Você Perdeu com "+str(pontos) + " pontos", True, red)
-<<<<<<< HEAD
-    textoContinue = fonteContinue.render("Aperte Espaço para continuar ou a Tecla P para Sair...", True, red)
+    textoContinue = fonteContinue.render("Aperte ESPAÇO para continuar ou X para Sair", True, green)
     gameDisplay.blit(textoContinue, (120, 700))
     gameDisplay.blit(texto, (120, 600))
     pygameDisplay.update()
@@ -94,13 +86,8 @@ def iniciar():
     pygame.mixer.music.set_volume(1)
     gameDisplay.blit(fundocomeco, (0, 0))
     fonteContinue = pygame.font.Font("freesansbold.ttf", 30)
-    textoContinue = fonteContinue.render("Aperte com o botão esquedo do Mouse e Espaço para continuar ou a Tecla P para Sair...", True, yellow)
-    gameDisplay.blit(textoContinue, (200, 700))
-=======
-    textoContinue = fonteContinue.render("Aperte ENTER para continuar...", True, green)
-    gameDisplay.blit(textoContinue, (120, 700))
-    gameDisplay.blit(texto, (120, 600))
->>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
+    textoContinue = fonteContinue.render("Aperte ESPAÇO para continuar ou X para Sair", True, green)
+    gameDisplay.blit(textoContinue, (110, 700))
     pygameDisplay.update()
 
 def jogo():
@@ -148,7 +135,7 @@ def jogo():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and jogando == False:
                     jogo()
-                if event.key == pygame.K_p:
+                if event.key == pygame.K_x:
                     limpa_Tela()
                     pygame.quit()
                     quit()
@@ -176,10 +163,6 @@ def jogo():
             elif direcaoNave == False and movimentoDNave + movimentoDNave > 0:
                 nave = pygame.transform.flip(nave, True, False)
                 direcaoNave = True
-<<<<<<< HEAD
-=======
-
->>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
 
         if jogando == True:
             posicaoXNave = posicaoXNave + movimentoANave
@@ -219,13 +202,13 @@ def jogo():
                     laser = pygame.transform.flip(laser, True, False)
                     pontos = pontos + 1
 
-            if direcao == True and pontos >= 20:
+            if direcao == True and pontos >= 15:
                 if posicaoXLaser2 < largura:
                     posicaoXLaser2 = posicaoXLaser2 + speed
                 else:
                     posicaoYLaser2 = random.randrange(0, altura -120)    
 
-            elif direcao == False and pontos >= 20:
+            elif direcao == False and pontos >= 15:
                 if posicaoXLaser2 >= -220:
                     posicaoXLaser2 = posicaoXLaser2 - speed
                 else:
@@ -233,12 +216,12 @@ def jogo():
                     
             gameDisplay.blit(fundo, (0, 0))
             gameDisplay.blit(laser, (posicaoXLaser, posicaoYLaser))
-            if pontos >= 20:
+            if pontos >= 15:
                 gameDisplay.blit(laser, (posicaoXLaser2, posicaoYLaser2))
             gameDisplay.blit(nave, (posicaoXNave, posicaoYNave))
             fonte = pygame.font.Font("freesansbold.ttf", 20)
-            placar = fonte.render("Pontos: "+str(pontos), True, green)
-            gameDisplay.blit(placar, (90, 10))
+            placar = fonte.render("Pontos: "+str(pontos), True, yellow)
+            gameDisplay.blit(placar, (715, 5))
 
             pixelsYNave = list(range(posicaoYNave, posicaoYNave + alturaNave+1))
             pixelsXNave = list(range(posicaoXNave, posicaoXNave + larguraNave+1))
@@ -260,7 +243,6 @@ def jogo():
 
         pygameDisplay.update()
         clock.tick(60)
-<<<<<<< HEAD
 
 while True:        
     if jogar == False:
@@ -275,12 +257,9 @@ while True:
             if event.key == pygame.K_SPACE:
                 jogar == True
                 jogo()
-            elif event.key == pygame.K_p:
+            elif event.key == pygame.K_x:
                 limpa_Tela()
                 pygame.quit()
                 quit()
     if jogar == True:
         break
-=======
-jogo()
->>>>>>> f791ac9378e4aeef9dc42648cf340c803efbeae7
