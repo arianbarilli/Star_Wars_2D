@@ -1,4 +1,4 @@
-# Star_Wars_2D
+# Star Wars 2D  🐍
 
 Desenvolvido Por Arian Barilli /RA 1129868 & João Pedro Voginski Gonçalves /RA 1129618 
 
