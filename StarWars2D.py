@@ -1,42 +1,5 @@
 import pygame
 import random
-from funcoes import dormir, limpa_Tela, registro
-
-acionamento = True
-arroba = True
-
-registro()
-
-while True:
-    limpa_Tela()
-    print()
-    print("BEM VINDO(A) AO STAR WARS X-WING ATTACK")
-    print()
-    print("Por Favor, digite Seu Nome e Endereço de E-mail")
-    print()
-    while acionamento == True:
-        conteudo = registro()
-        nome = input("Nome: ")
-        while arroba == True:
-            email = input(str("Email: "))
-            if "@" in email and ".com" in email:
-                conteudo = conteudo + nome + "\n" + email + "\n" + "\n"
-                arroba = False
-                acionamento = False
-                break
-            elif "@" not in email or ".com" not in email:
-                print ("Por Favor digite um E-mail Válido")
-                arroba = True
-        
-        arquivo = open("Registro de Login.txt", "w")
-        arquivo.write(conteudo)
-        arquivo.close()
-        print("Registro de login salvo com sucesso!")
-        dormir()
-        if arroba == False:
-            break
-    if arroba == False:
-        break
 
 pygame.init()
 largura = 1530
@@ -129,14 +92,12 @@ def jogo():
 
         for event in eventos.get():
             if event.type == pygame.QUIT:
-                limpa_Tela()
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and jogando == False:
                     jogo()
                 if event.key == pygame.K_x:
-                    limpa_Tela()
                     pygame.quit()
                     quit()
                 if event.key == pygame.K_a:
@@ -258,7 +219,6 @@ while True:
                 jogar == True
                 jogo()
             elif event.key == pygame.K_x:
-                limpa_Tela()
                 pygame.quit()
                 quit()
     if jogar == True:
